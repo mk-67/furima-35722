@@ -11,7 +11,6 @@ class Product < ApplicationRecord
     validates :prefecture_id
     validates :shipping_day_id
     validates :price
-    validates :name
     validates :image
   end
 end
