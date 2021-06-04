@@ -14,7 +14,7 @@ class PurchaseAddress
     validates :prefecture_id
     validates :municipality
     validates :address
-    validates :phone_number, format: {with: /\A\d{11}\z/}
+    validates :phone_number, format: {with: /\A\d{10,11}\z/}
   end
 
   def save
