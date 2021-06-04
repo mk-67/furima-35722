@@ -1,16 +1,12 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!
+  before_action :kosuke_params
 
   def index
-    @product = Product.find(params[:product_id])
-    if current_user.id == @product.user.id && !@product.purchase
-      redirect_to root_path
-    end
     @purchase_address = PurchaseAddress.new
   end
 
   def create
-    @product = Product.find(params[:product_id])
     @purchase_address = PurchaseAddress.new(purchase_address_params)
     if @purchase_address.valid?
       pay_product
@@ -22,6 +18,13 @@ class PurchasesController < ApplicationController
   end
 
   private
+  def kosuke_params
+    @product = Product.find(params[:product_id])
+    if current_user.id == @product.user.id && !@product.purchase
+      redirect_to root_path
+    end
+  end
+
   def purchase_address_params
     params.require(:purchase_address).permit(:postal_code, :prefecture_id, :municipality, :address, :building_name, :phone_number).merge(user_id: current_user.id, product_id: params[:product_id], token: params[:token])#, purchase_id: params[:purchase_id])
   end

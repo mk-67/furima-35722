@@ -6,8 +6,6 @@ RSpec.describe PurchaseAddress, type: :model do
     product = FactoryBot.create(:product)
     @purchase_address = FactoryBot.build(:purchase_address, user_id: user.id, product_id: product.id)
     sleep(0.1)
-    #product = FactoryBot.create(:product)
-    #@purchase_address = FactoryBot.build(:purchase_address, product_id: product.id)
   end
 
   context '内容に問題ない場合' do
