@@ -1,5 +1,6 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!
+  before_action :maeken_params
   before_action :kosuke_params
 
   def index
@@ -18,8 +19,11 @@ class PurchasesController < ApplicationController
   end
 
   private
-  def kosuke_params
+  def maeken_params
     @product = Product.find(params[:product_id])
+  end
+
+  def kosuke_params
     if current_user.id == @product.user.id && !@product.purchase
       redirect_to root_path
     end
